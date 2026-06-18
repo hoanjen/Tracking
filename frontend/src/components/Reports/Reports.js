@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { trackingService } from '../../services/api';
 import './Reports.css';
 
@@ -7,11 +7,7 @@ function Reports({ accountId, username }) {
   const [loading, setLoading] = useState(true);
   const [expandedId, setExpandedId] = useState(null);
 
-  useEffect(() => {
-    if (accountId) { setReports([]); setExpandedId(null); fetchReports(); }
-  }, [accountId]);
-
-  const fetchReports = async () => {
+  const fetchReports = useCallback(async () => {
     setLoading(true);
     try {
       const res = await trackingService.getTrackingHistory(accountId);
@@ -21,7 +17,11 @@ function Reports({ accountId, username }) {
     } finally {
       setLoading(false);
     }
-  };
+  }, [accountId]);
+
+  useEffect(() => {
+    if (accountId) { setReports([]); setExpandedId(null); fetchReports(); }
+  }, [accountId, fetchReports]);
 
   const copy = (text) => {
     navigator.clipboard.writeText(text);
