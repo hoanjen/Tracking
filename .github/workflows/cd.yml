@@ -11,8 +11,8 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_BACKEND: ${{ github.repository }}/backend
-  IMAGE_FRONTEND: ${{ github.repository }}/frontend
+  IMAGE_BACKEND: hoanjen/tracking/backend
+  IMAGE_FRONTEND: hoanjen/tracking/frontend
 
 jobs:
   changes:
@@ -211,8 +211,8 @@ jobs:
           REGISTRY: ${{ env.REGISTRY }}
           BACKEND_IMAGE: ${{ env.REGISTRY }}/${{ env.IMAGE_BACKEND }}:${{ github.sha }}
           FRONTEND_IMAGE: ${{ env.REGISTRY }}/${{ env.IMAGE_FRONTEND }}:${{ github.sha }}
-          DEPLOY_BACKEND: ${{ needs.changes.outputs.backend }}
-          DEPLOY_FRONTEND: ${{ needs.changes.outputs.frontend }}
+          DEPLOY_BACKEND: ${{ needs.build-backend.result == 'success' }}
+          DEPLOY_FRONTEND: ${{ needs.build-frontend.result == 'success' }}
           GHCR_USERNAME: ${{ github.actor }}
           GHCR_TOKEN: ${{ github.token }}
           HEAD_SHA: ${{ github.sha }}
@@ -233,6 +233,7 @@ jobs:
             SERVICES=""
 
             if [ "$DEPLOY_BACKEND" = "true" ]; then
+              echo "Pulling backend image: $BACKEND_IMAGE"
               sed -i '/^BACKEND_IMAGE=/d' .env
               echo "BACKEND_IMAGE=$BACKEND_IMAGE" >> .env
               docker pull "$BACKEND_IMAGE"
@@ -240,6 +241,7 @@ jobs:
             fi
 
             if [ "$DEPLOY_FRONTEND" = "true" ]; then
+              echo "Pulling frontend image: $FRONTEND_IMAGE"
               sed -i '/^FRONTEND_IMAGE=/d' .env
               echo "FRONTEND_IMAGE=$FRONTEND_IMAGE" >> .env
               docker pull "$FRONTEND_IMAGE"
