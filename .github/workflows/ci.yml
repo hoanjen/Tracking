@@ -60,12 +60,12 @@ jobs:
         working-directory: backend
         env:
           DB_URL: jdbc:postgresql://localhost:5432/tracking_test
-          DB_USERNAME: ${{ secrets.DB_USERNAME }}
-          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-          JWT_SECRET: ${{ secrets.JWT_SECRET }}
-          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
-          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
-          RAPIDAPI_KEY: ${{ secrets.RAPIDAPI_KEY }}
+          DB_USERNAME: postgres
+          DB_PASSWORD: postgres
+          JWT_SECRET: ci-test-secret
+          GOOGLE_CLIENT_ID: ci
+          GOOGLE_CLIENT_SECRET: ci
+          RAPIDAPI_KEY: ci
         run: mvn clean verify
 
   frontend:
@@ -88,8 +88,8 @@ jobs:
         working-directory: frontend
         env:
           CI: true
-          REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL }}
-          REACT_APP_GOOGLE_CLIENT_ID: ${{ secrets.REACT_APP_GOOGLE_CLIENT_ID }}
+          REACT_APP_API_URL: ${{ vars.REACT_APP_API_URL }}
+          REACT_APP_GOOGLE_CLIENT_ID: ${{ vars.REACT_APP_GOOGLE_CLIENT_ID }}
         run: |
           npm ci
           npm run build
