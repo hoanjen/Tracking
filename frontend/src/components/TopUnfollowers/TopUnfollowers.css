@@ -1,0 +1,174 @@
+.top-unfollowers {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.unfollowers-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.unfollowers-header h2 {
+  font-size: 22px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.95);
+  letter-spacing: -0.4px;
+  margin-bottom: 3px;
+}
+
+.unfollowers-subtitle {
+  color: rgba(255,255,255,0.4);
+  font-size: 13px;
+}
+
+.refresh-btn {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.5);
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.15s;
+}
+
+.refresh-btn:hover:not(:disabled) {
+  background: rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.8);
+}
+
+.refresh-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.unfollowers-table {
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+.table-header,
+.table-row {
+  display: grid;
+  grid-template-columns: 60px 170px 1fr 120px 70px;
+  gap: 12px;
+  align-items: center;
+  padding: 13px 18px;
+}
+
+.table-header {
+  background: rgba(255,255,255,0.04);
+  color: rgba(255,255,255,0.35);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.table-row {
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  transition: background 0.15s;
+}
+
+.table-row:last-child { border-bottom: none; }
+.table-row:hover { background: rgba(255,255,255,0.035); }
+
+.col-rank {
+  color: #a8b8ff;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.tiktok-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  background: rgba(110,142,251,0.12);
+  border: 1px solid rgba(110,142,251,0.22);
+  color: #a8b8ff;
+  border-radius: 99px;
+  font-size: 12px;
+  font-weight: 600;
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.col-username {
+  color: rgba(255,255,255,0.82);
+  font-size: 14px;
+  font-weight: 500;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.col-count { text-align: center; }
+
+.count-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  padding: 4px 10px;
+  background: rgba(248,113,113,0.12);
+  border: 1px solid rgba(248,113,113,0.22);
+  color: #f87171;
+  border-radius: 99px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.col-action { text-align: right; }
+
+.copy-btn {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.4);
+  border-radius: 6px;
+  padding: 5px 10px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  transition: all 0.15s;
+}
+
+.copy-btn:hover {
+  background: rgba(110,142,251,0.15);
+  border-color: rgba(110,142,251,0.3);
+  color: #a8b8ff;
+}
+
+@media (max-width: 720px) {
+  .table-header { display: none; }
+  .unfollowers-table { background: transparent; border: none; backdrop-filter: none; }
+  .table-row {
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      'rank account'
+      'username username'
+      'count action';
+    margin-bottom: 10px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 14px;
+  }
+  .col-rank { grid-area: rank; }
+  .col-tiktok { grid-area: account; text-align: right; }
+  .col-username { grid-area: username; }
+  .col-count { grid-area: count; text-align: left; }
+  .col-action { grid-area: action; }
+}

@@ -1,0 +1,184 @@
+.tiktok-accounts {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Section card ── */
+.section-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+}
+
+.section-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.4);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: 16px;
+}
+
+/* ── Add account form ── */
+.add-account-form {
+  display: flex;
+  gap: 10px;
+}
+
+.add-account-form input {
+  flex: 1;
+}
+
+/* ── Account grid ── */
+.accounts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 14px;
+}
+
+.account-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 16px;
+  padding: 18px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  transition: all 0.2s;
+}
+
+.account-card:hover {
+  background: rgba(255,255,255,0.07);
+  border-color: rgba(255,255,255,0.15);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+}
+
+.account-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(110,142,251,0.3), rgba(167,119,227,0.3));
+  border: 1px solid rgba(110,142,251,0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.account-info { flex: 1; min-width: 0; }
+
+.account-username {
+  font-size: 15px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.92);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.account-meta {
+  font-size: 12px;
+  color: rgba(255,255,255,0.35);
+  margin-top: 2px;
+}
+
+.account-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.btn-track {
+  background: linear-gradient(135deg, rgba(110,142,251,0.25), rgba(167,119,227,0.2));
+  border: 1px solid rgba(110,142,251,0.35);
+  color: #a8b8ff;
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: all 0.15s;
+}
+
+.btn-track:hover:not(:disabled) {
+  background: linear-gradient(135deg, rgba(110,142,251,0.4), rgba(167,119,227,0.35));
+  transform: translateY(-1px);
+}
+
+.btn-track:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.btn-reports {
+  background: rgba(52,211,153,0.1);
+  border: 1px solid rgba(52,211,153,0.25);
+  color: #34d399;
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  transition: all 0.15s;
+}
+
+.btn-reports:hover:not(:disabled) {
+  background: rgba(52,211,153,0.2);
+}
+
+.btn-delete {
+  background: rgba(248,113,113,0.08);
+  border: 1px solid rgba(248,113,113,0.2);
+  color: rgba(248,113,113,0.7);
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 12px;
+  transition: all 0.15s;
+}
+
+.btn-delete:hover:not(:disabled) {
+  background: rgba(248,113,113,0.18);
+  color: #f87171;
+}
+
+/* Fetching state */
+.fetching-indicator {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #a8b8ff;
+}
+
+.fetching-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #6e8efb;
+  animation: pulse 1s ease-in-out infinite;
+}
+
+.fetching-dot:nth-child(2) { animation-delay: 0.15s; }
+.fetching-dot:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.3; transform: scale(0.8); }
+  50%       { opacity: 1;   transform: scale(1.1); }
+}
+
+.limit-hint {
+  font-size: 11px;
+  color: rgba(255,255,255,0.2);
+  margin-top: 12px;
+  text-align: center;
+}

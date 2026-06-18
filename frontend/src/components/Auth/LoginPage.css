@@ -1,0 +1,102 @@
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 24px;
+}
+
+.login-card {
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(40px) saturate(180%);
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow:
+    0 32px 64px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  border-radius: 28px;
+  padding: 52px 48px;
+  text-align: center;
+  width: 100%;
+  max-width: 400px;
+  animation: fadeUp 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.login-logo {
+  font-size: 48px;
+  margin-bottom: 20px;
+  display: block;
+  filter: drop-shadow(0 4px 12px rgba(110, 142, 251, 0.4));
+}
+
+.login-card h1 {
+  font-size: 26px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.95);
+  letter-spacing: -0.5px;
+  margin-bottom: 8px;
+}
+
+.login-card p {
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 14px;
+  margin-bottom: 36px;
+  line-height: 1.5;
+}
+
+.login-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.login-divider::before,
+.login-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.login-divider span {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.3);
+  white-space: nowrap;
+}
+
+.login-button {
+  display: flex;
+  justify-content: center;
+}
+
+/* Pill glow behind Google button */
+.login-button-wrap {
+  position: relative;
+  display: inline-flex;
+}
+
+.login-button-wrap::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(110,142,251,0.3), rgba(167,119,227,0.3));
+  filter: blur(8px);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.login-button-wrap:hover::before { opacity: 1; }
+
+.login-footer {
+  margin-top: 28px;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.2);
+  line-height: 1.6;
+}

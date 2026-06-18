@@ -188,11 +188,14 @@ jobs:
       (needs.changes.outputs.backend == 'true' || needs.changes.outputs.frontend == 'true')
     runs-on: ubuntu-latest
     environment: production
+    permissions:
+      contents: read
+      packages: read
 
     steps:
       - uses: actions/checkout@v4
 
-      - name: Copy docker-compose.prod.yml lên server
+      - name: Copy docker-compose.prod.yml to ec2 server
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.SSH_HOST }}
@@ -211,7 +214,7 @@ jobs:
           DEPLOY_BACKEND: ${{ needs.changes.outputs.backend }}
           DEPLOY_FRONTEND: ${{ needs.changes.outputs.frontend }}
           GHCR_USERNAME: ${{ github.actor }}
-          GHCR_TOKEN: ${{ secrets.GHCR_TOKEN }}
+          GHCR_TOKEN: ${{ github.token }}
           HEAD_SHA: ${{ github.sha }}
         with:
           host: ${{ secrets.SSH_HOST }}
